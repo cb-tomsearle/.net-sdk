@@ -47,6 +47,10 @@ namespace CTCT.Util
         /// <returns>RawApiResponse</returns>
         public RawApiResponse HttpRequest(string url, HttpMethod method, IContentType contentType, string accessToken, string apiKey, byte[] data)
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+
             var address = url;
 
             if (!string.IsNullOrEmpty(apiKey))
